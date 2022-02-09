@@ -14,7 +14,7 @@ public class Course
     private List<Quiz> quizzes;
     private int maxStudents;
     private String courseName;
-    
+
     public Course(int maxStudents, Teacher teacher, String courseName)
     {
         students = new ArrayList<Student>();
@@ -24,6 +24,38 @@ public class Course
         this.courseName = courseName;
         quizzes = new ArrayList<Quiz>();
 
+    }
+
+    public String getSchoolForCourse() {
+        String school;
+        System.out.println("courseName: " + this.courseName + " and teacher = " + this.teacher.getName());
+        switch (this.courseName) {
+            case "ELA 101":
+                school = "SFSU";
+                if ((this.teacher.getName() == "Stacy Shawn") && (this.courseName == "ELA 101")) {
+                    school = "PSU";
+                }
+                break;
+            case "ELA 102":
+                school = "OSU";
+                if (((this.teacher.getName() == "Nancy Johnson") || (this.teacher.getName() == "Stuart Hunt")) && (this.courseName == "ELA 102")) {
+                    school = "PSU";
+                }
+                break;
+            case "ELA 103":
+                school = "PSU";
+                if (this.courseName == "ELA 103") {
+                    school = "OSU";
+                } else if ((this.teacher.getName() == "Jenine Long")) {
+                    school = "SFSU";
+                }
+            case "SCI 101": case "SCI 102": case "SCI 103":
+                school = "OSU";
+            default:
+                throw new ForbiddenException("Courses need to be part of a school");
+        }
+        System.out.println("school: " + school);
+        return school;
     }
 
     public void addStudent(Student student) {

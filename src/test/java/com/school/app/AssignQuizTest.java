@@ -1,5 +1,6 @@
 package com.school.app;
 
+import com.school.app.university.School;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +33,10 @@ public class AssignQuizTest
     @Test
     public void test_assignQuizToEnrolledStudent()
     {
+        String schoolAbbreviatedName = ELA101.getSchoolForCourse();
+        School school = new School(schoolAbbreviatedName);
+        String fullSchoolName = school.getFullName();
+        Assert.assertTrue(fullSchoolName.equals("San Francisco State University"));
         John.assignQuiz(ELA101, quiz, Max);
         Assert.assertTrue(Max.canTakeQuiz(quiz));
     }

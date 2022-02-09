@@ -12,7 +12,8 @@ import com.school.app.user.Teacher;
 
 public class CalculateGradePerStudentTest
 {
-    private Teacher John;
+    private Teacher Stacy;
+    private Teacher Stuart;
     private Course ELA101;
     private Course ELA102;
     private Quiz quiz1;
@@ -20,40 +21,41 @@ public class CalculateGradePerStudentTest
     private Quiz quiz3;
     private Quiz quiz4;
     private Quiz quiz5;
-    private Student Max;
+    private Student Greg;
     private Student Lilly;
 
     @Before
     public void setup()
     {
-        John = new Teacher("John Doe");
-        ELA101 = new Course(5, John ,"ELA 101");
-        ELA102 = new Course(5, John, "ELA 102");
-        quiz1 = John.createQuiz(ELA101, "ELA 101 Quiz 1");
-        quiz2 = John.createQuiz(ELA101, "ELA 101 Quiz 2");
-        quiz3 = John.createQuiz(ELA101, "ELA 101 Quiz 3");
-        quiz4 = John.createQuiz(ELA102, "ELA 102 Quiz 1");
-        quiz5 = John.createQuiz(ELA102, "ELA 102 Quiz 2");
-        Max = new Student("Max Johnson");
+        Stacy = new Teacher("Stacy Shawn");
+        Stuart = new Teacher("Stuart Hun");
+        ELA101 = new Course(5, Stacy,"ELA 101");
+        ELA102 = new Course(5, Stuart, "ELA 102");
+        quiz1 = Stacy.createQuiz(ELA101, "ELA 101 Quiz 1");
+        quiz2 = Stacy.createQuiz(ELA101, "ELA 101 Quiz 2");
+        quiz3 = Stacy.createQuiz(ELA101, "ELA 101 Quiz 3");
+        quiz4 = Stuart.createQuiz(ELA102, "ELA 102 Quiz 1");
+        quiz5 = Stuart.createQuiz(ELA102, "ELA 102 Quiz 2");
+        Greg = new Student("Greg Mason");
         Lilly = new Student("Lilly Wang");
-        Max.enrollInCourse(ELA101);
-        Max.enrollInCourse(ELA102);
+        Greg.enrollInCourse(ELA101);
+        Greg.enrollInCourse(ELA102);
         Lilly.enrollInCourse(ELA101);
 
-        John.assignQuiz(ELA101, quiz1, Max);
-        John.assignQuiz(ELA101, quiz2, Max);
-        John.assignQuiz(ELA101, quiz3, Max);
-        John.assignQuiz(ELA102, quiz4, Max);
-        John.assignQuiz(ELA102, quiz5, Max);
-        John.assignQuiz(ELA101, quiz1, Lilly);
-        John.assignQuiz(ELA101, quiz2, Lilly);
-        John.assignQuiz(ELA101, quiz3, Lilly);
+        Stacy.assignQuiz(ELA101, quiz1, Greg);
+        Stacy.assignQuiz(ELA101, quiz2, Greg);
+        Stacy.assignQuiz(ELA101, quiz3, Greg);
+        Stuart.assignQuiz(ELA102, quiz4, Greg);
+        Stuart.assignQuiz(ELA102, quiz5, Greg);
+        Stacy.assignQuiz(ELA101, quiz1, Lilly);
+        Stacy.assignQuiz(ELA101, quiz2, Lilly);
+        Stacy.assignQuiz(ELA101, quiz3, Lilly);
 
-        Max.updateQuizGrade(quiz1, 3);
-        Max.updateQuizGrade(quiz2, 2);
-        Max.updateQuizGrade(quiz3, 0);
-        Max.updateQuizGrade(quiz4, 5);
-        Max.updateQuizGrade(quiz5, 1);
+        Greg.updateQuizGrade(quiz1, 3);
+        Greg.updateQuizGrade(quiz2, 2);
+        Greg.updateQuizGrade(quiz3, 0);
+        Greg.updateQuizGrade(quiz4, 5);
+        Greg.updateQuizGrade(quiz5, 1);
 
         Lilly.updateQuizGrade(quiz1, 2);
         Lilly.updateQuizGrade(quiz2, 4);
@@ -63,22 +65,22 @@ public class CalculateGradePerStudentTest
     @Test
     public void test_calculateStudentGradeForOneCourse()
     {
-        Assert.assertEquals(John.calculateStudentGradeForOneCourse(Max, ELA101) , 5);
-        Assert.assertEquals(John.calculateStudentGradeForOneCourse(Max, ELA102), 6);
-        Assert.assertEquals(John.calculateStudentGradeForOneCourse(Lilly, ELA101) , 10);
+        Assert.assertEquals(Stacy.calculateStudentGradeForOneCourse(Greg, ELA101) , 5);
+        Assert.assertEquals(Stacy.calculateStudentGradeForOneCourse(Greg, ELA102), 6);
+        Assert.assertEquals(Stacy.calculateStudentGradeForOneCourse(Lilly, ELA101) , 10);
     }
 
     @Test
     public void test_calculateStudentGradeForAllSemesterCourses()
     {
-        Assert.assertEquals(John.calculateGradesForStudent(Max), 11);
-        Assert.assertEquals(John.calculateGradesForStudent(Lilly), 10);
+        Assert.assertEquals(Stacy.calculateGradesForStudent(Greg), 5);
+        Assert.assertEquals(Stacy.calculateGradesForStudent(Lilly), 10);
     }
 
     @Test(expected = ForbiddenException.class)
     public void calculateStudentGradeForStudentNotEnrolled()
     {
-        John.calculateStudentGradeForOneCourse(Lilly, ELA102);
+        Stacy.calculateStudentGradeForOneCourse(Lilly, ELA102);
     }
 
 }
