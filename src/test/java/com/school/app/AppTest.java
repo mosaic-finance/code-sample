@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
                      CreateQuizTest.class,
                      AssignQuizTest.class,
                      TakeQuizTest.class,
-                     CalculateGradePerStudentTest.class})
+                     CalculateGradePerStudentTest.class,
+                     SemesterListTest.class})
 public class AppTest
 {
 }
